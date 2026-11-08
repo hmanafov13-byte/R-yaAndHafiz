@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100609">
+<title>For My Princess ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #100609;
+  color: #fff0f3;
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at 50% 30%, #501326, transparent 60%),
+    radial-gradient(ellipse at 10% 90%, #300b19, transparent 55%),
+    #100609;
+}
+
+#hearts {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  bottom: -30px;
+  color: #e94b70;
+  animation: floatUp linear forwards;
+  opacity: 0;
+}
+
+@keyframes floatUp {
+  15% { opacity: .7; }
+  100% {
+    transform: translateY(-110vh) rotate(35deg);
+    opacity: 0;
+  }
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.screen {
+  min-height: 100svh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 22px;
+  animation: appear .8s ease;
+}
+
+.screen.active {
+  display: flex;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.content {
+  width: 100%;
+  max-width: 520px;
+}
+
+.small {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #e69aaa;
+  margin-bottom: 30px;
+}
+
+h1, h2, .serif {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+}
+
+h1 {
+  font-size: clamp(55px, 12vw, 88px);
+  line-height: 1.05;
+}
+
+h1 span {
+  color: #f18ba4;
+  font-style: italic;
+}
+
+p {
+  color: #d2b9c1;
+  line-height: 1.9;
+  font-size: 14px;
+}
+
+.intro-text {
+  margin: 25px auto 35px;
+  max-width: 350px;
+}
+
+.heart-big {
+  font-size: 48px;
+  color: #f35a7c;
+  display: block;
+  margin-bottom: 25px;
+  animation: pulse 1.7s infinite;
+  filter: drop-shadow(0 0 18px #f35a7c);
+}
+
+@keyframes pulse {
+  50% { transform: scale(1.17); }
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid #a83d59;
+  background: linear-gradient(120deg, #751a35, #b52d51);
+  color: white;
+  padding: 15px 28px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: .5px;
+  transition: .3s;
+  margin: 6px;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px #c52b4c55;
+}
+
+.btn.secondary {
+  background: transparent;
+  border-color: #75404f;
+  color: #f0c5d0;
+}
+
+.card {
+  padding: 35px 26px;
+  border: 1px solid #9a405544;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #491323aa, #1b0b12dd);
+  box-shadow: 0 20px 60px #0005;
+  margin: 30px 0;
+}
+
+.card p {
+  font-size: 15px;
+}
+
+.emoji {
+  font-size: 37px;
+  margin-bottom: 22px;
+}
+
+.envelope {
+  width: 170px;
+  height: 120px;
+  margin: 35px auto;
+  position: relative;
+  background: #86223f;
+  border-radius: 7px;
+  cursor: pointer;
+  box-shadow: 0 10px 40px #e12c5944;
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #bb3b5b;
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  transform-origin: top;
+  transition: .7s;
+  z-index: 2;
+}
+
+.envelope::after {
+  content: "♥";
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  color: #ffe0e8;
+  z-index: 3;
+}
+
+.envelope.open::before {
+  transform: rotateX(180deg);
+}
+
+.envelope.open::after {
+  opacity: 0;
+}
+
+.letter {
+  display: none;
+  text-align: left;
+  padding: 30px 25px;
+  border-radius: 14px;
+  border: 1px solid #a63c5655;
+  background: #1d0c13;
+  animation: appear .8s ease;
+}
+
+.letter.visible {
+  display: block;
+}
+
+.letter h2 {
+  color: #f3a0b2;
+  font-size: 32px;
+  margin-bottom: 22px;
+}
+
+.letter p {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.letter .sign {
+  text-align: right;
+  color: #f3a0b2;
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  margin-top: 25px;
+}
+
+.question {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(35px, 8vw, 52px);
+  margin: 25px 0;
+}
+
+.answer {
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.answer-text {
+  color: #f5a0b5;
+  font-size: 17px;
+  font-family: 'Playfair Display', serif;
+  animation: appear .5s ease;
+}
+
+.footer {
+  font-size: 10px;
+  color: #87616e;
+  letter-spacing: 3px;
+  margin-top: 30px;
+}
+
+@media(max-width:450px) {
+  .card { padding: 27px 20px; }
+  .letter { padding: 25px 19px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="hearts"></div>
+
+<main>
+
+<!-- EKRAN 1 -->
+<section class="screen active" id="s1">
+  <div class="content">
+
+    <div class="small">A LITTLE SOMETHING FOR YOU</div>
+
+    <span class="heart-big">♥</span>
+
+    <h1>Prenses</h1>
+
+    <p class="intro-text">
+      Sənə balaca bir şey hazırlamışam.
+      Açmağa tələs, çox da naz eləmə 🙈
+    </p>
+
+    <button class="btn" onclick="go(2)">
+      Aç görüm nədi ❤️
+    </button>
+
+    <div class="footer">MADE JUST FOR YOU</div>
+
+  </div>
+</section>
+
+
+<!-- EKRAN 2 -->
+<section class="screen" id="s2">
+  <div class="content">
+
+    <div class="small">BİR ŞEY DEYİM...</div>
+
+    <h2 style="font-size:43px">
+      ❤️
+    </h2>
+
+    <div class="card">
+
+      <div class="emoji">🥺</div>
+
+      <p>
+        Bizim tanış olduğumuz tarixi qarışdırmışdım.
+        <br><br>
+        Hə, bilirəm, indi yəqin deyirsən ki,
+        Bunu da necə unutmusan? 😅
+        <br><br>
+        Amma sənə demək istədiyim bir neçə şey var.
+      </p>
+
+    </div>
+
+    <button class="btn" onclick="go(3)">
+      Dinləyirəm səni ❤️
+    </button>
+
+  </div>
+</section>
+
+
+<!-- EKRAN 3 -->
+<section class="screen" id="s3">
+  <div class="content">
+
+    <div class="small">BALACA MƏKTUB</div>
+
+    <h2 style="font-size:43px">❤️</h2>
+
+    <div class="envelope" id="envelope" onclick="openLetter()"></div>
+
+    <p style="font-size:11px;color:#d98a9f">
+      ZƏRFƏ TOXUN ♥
+    </p>
+
+    <div class="letter" id="letter">
+
+      <h2>Canım ❤️</h2>
+
+      <p>
+        Birinci səndən üzr istəyirəm.
+        Bizim tanış olduğumuz tarixi unutmuşam😅
+        Bilirəm, heç yaxşı hərəkət deyil.
+      </p>
+
+      <p>
+        Amma vallah səni və sənin mənim üçün
+        nə qədər dəyərli olduğunu unutmamışam.
+      </p>
+
+      <p>
+        Çox da incimə məndən şirinim ❤️
+      </p>
+
+      <div class="sign">
+        Sənin Hafizin ❤️
+      </div>
+
+    </div>
+
+    <button class="btn" id="next"
+      style="display:none;margin-top:25px"
+      onclick="go(4)">
+      Bir sualım da var 🙈
+    </button>
+
+  </div>
+</section>
+
+
+<!-- EKRAN 4 -->
+<section class="screen" id="s4">
+  <div class="content">
+
+    <span class="heart-big">♥</span>
+
+    <div class="small">SON BİR ŞEY...</div>
+
+    <h2 class="question">
+      Məni bağışladın? 🥺
+    </h2>
+
+    <p>
+      Yoxsa hələ də bir az naz edəcəksən? 😂
+    </p>
+
+    <div style="margin-top:30px">
+
+      <button class="btn" onclick="answer(1)">
+        Hə, bağışladım ❤️
+      </button>
+
+      <button class="btn secondary" onclick="answer(2)">
+        Bir az da naz edəcəm 🙈
+      </button>
+
+    </div>
+
+    <div class="answer" id="answer"></div>
+
+  </div>
+</section>
+
+
+<!-- EKRAN 5 -->
+<section class="screen" id="s5">
+  <div class="content">
+
+    <span class="heart-big">♥</span>
+
+    <div class="small">SƏN VƏ MƏN</div>
+
+    <h1 style="font-size:65px">
+      Love you,<br>
+      <span>Prenses.</span>
+    </h1>
+
+    <div style="width:55px;height:1px;background:#d94b6b;margin:25px auto"></div>
+
+<p>
+  Bir daha üzr istəyirəm, mənim gözəlim. ❤️
+</p>
+
+    <div class="card">
+
+      <p style="font-family:'Playfair Display',serif;font-size:23px;color:#f2a0b2">
+        Hə, bir də...
+      </p>
+
+      <p style="margin-top:12px">
+        Bu saytı hazırlamaq bəhanə idi,
+        əslində sadəcə sənə olan sevgimi
+        bir az fərqli göstərmək istədim. ❤️
+      </p>
+
+    </div>
+
+    <div class="footer">
+      FOREVER YOURS · HAFIZ
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<script>
+
+// ÜRƏK ANİMASİYASI
+const hearts = document.getElementById('hearts');
+
+function floatingHeart() {
+
+  const h = document.createElement('span');
+
+  h.className = 'heart';
+
+  h.textContent = ['♥','♡','❤'][
+    Math.floor(Math.random()*3)
+  ];
+
+  h.style.left = Math.random()*100+'%';
+
+  h.style.fontSize =
+    (12+Math.random()*18)+'px';
+
+  h.style.animationDuration =
+    (8+Math.random()*9)+'s';
+
+  hearts.appendChild(h);
+
+  setTimeout(() => h.remove(),18000);
+}
+
+setInterval(floatingHeart,650);
+
+
+// EKRAN KEÇİDLƏRİ
+function go(number) {
+
+  document.querySelectorAll('.screen')
+    .forEach(s => s.classList.remove('active'));
+
+  document.getElementById('s'+number)
+    .classList.add('active');
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+}
+
+
+// MƏKTUBU AÇMAQ
+let opened = false;
+
+function openLetter() {
+
+  if(opened) return;
+
+  opened = true;
+
+  document.getElementById('envelope')
+    .classList.add('open');
+
+  setTimeout(() => {
+
+    document.getElementById('letter')
+      .classList.add('visible');
+
+    document.getElementById('next')
+      .style.display = 'inline-block';
+
+    document.getElementById('letter')
+      .scrollIntoView({
+        behavior:'smooth',
+        block:'center'
+      });
+
+  },700);
+}
+
+
+// RÖYANIN CAVABI
+function answer(choice) {
+
+  const result = document.getElementById('answer');
+
+  if(choice === 1) {
+
+    result.innerHTML = `
+      <div class="answer-text">
+        Ayyy, bilirdim ki məni çox incitməyəcəksən. 😂❤️
+      </div>
+
+      <button class="btn" onclick="go(5)">
+        gəl bura prensesim❤️
+      </button>
+    `;
+
+  } else {
+
+    result.innerHTML = `
+      <div class="answer-text">
+        Yaxşı yaxşı, Nə qədər lazımdırsa könlünü alacam 🙈❤️
+      </div>
+
+      <button class="btn" onclick="go(5)">
+        Yenə də səni çox istəyirəm ❤️
+      </button>
+    `;
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
